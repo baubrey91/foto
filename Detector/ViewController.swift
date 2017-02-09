@@ -7,7 +7,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        personPic.image = UIImage(named: "face-1")
+        personPic.image = UIImage(named: "face-2")
         detect()
     }
     
@@ -27,7 +27,7 @@ class ViewController: UIViewController {
         transform = transform.translatedBy(x: 0, y: -ciImageSize.height)
         
         for face in faces as! [CIFaceFeature] {
-            
+
             print("Found bounds are \(face.bounds)")
             
             // Apply the transform to convert the coordinates
@@ -44,18 +44,20 @@ class ViewController: UIViewController {
             faceViewBounds.origin.x += offsetX
             faceViewBounds.origin.y += offsetY
             
+            
             let faceBox = UIView(frame: faceViewBounds)
 
-           /* faceBox.layer.borderWidth = 3
+            faceBox.layer.borderWidth = 3
             faceBox.layer.borderColor = UIColor.red.cgColor
             faceBox.backgroundColor = UIColor.clear
-            personPic.addSubview(faceBox)*/
-            
-            let darkBlur = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
-            let blur = UIBlurEffect(style: UIBlurEffectStyle.light)
-            let effectView:UIVisualEffectView = UIVisualEffectView (effect: darkBlur)
-            effectView.frame = faceViewBounds
-            personPic.addSubview(effectView)
+            personPic.addSubview(faceBox)
+
+            let button = UIButton()
+            button.frame = (frame: CGRect(x: faceViewBounds.origin.x, y: faceViewBounds.origin.y, width: faceViewBounds.width, height: faceViewBounds.height))
+            //button.backgroundColor = UIColor.clear
+            button.setTitle("Name your Button ", for: .normal)
+            button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+            self.view.addSubview(button)
             
             if face.hasLeftEyePosition {
                 print("Left eye bounds are \(face.leftEyePosition)")
@@ -66,4 +68,30 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    func buttonAction(sender: UIButton!, x: Int) {
+        
+        sender.alpha = 0.5
+        sender.backgroundColor = .lightGray
+       /* let darkBlur = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
+        let blur = UIBlurEffect(style: UIBlurEffectStyle.light)
+        let effectView:UIVisualEffectView = UIVisualEffectView (effect: darkBlur)
+        effectView.frame = CGRect(x: sender.frame.minX, y: sender.frame.minY, width: (sender.frame.maxX - sender.frame.minX), height: (sender.frame.maxY - sender.frame.minY))
+        personPic.addSubview(effectView)*/
+    }
 }
+
+/*4 options
+ 1 - red hollow box
+ 2 - blurred box
+ 3 - black eye bars
+ 4 - clear
+ 
+ make changes to button iteself?
+ append dettected face values into array- creating another array of images
+ */
+
+
+
+
+
