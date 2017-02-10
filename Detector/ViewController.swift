@@ -4,11 +4,17 @@ import CoreImage
 class ViewController: UIViewController {
     @IBOutlet weak var personPic: UIImageView!
     
+    var xArray = [CGFloat]()
+    var yArray = [CGFloat]()
+    var widthArray = [CGFloat]()
+    var heightArray = [CGFloat]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         personPic.image = UIImage(named: "face-2")
         detect()
+        createBlur()
     }
     
     func detect() {
@@ -28,7 +34,7 @@ class ViewController: UIViewController {
         
         for face in faces as! [CIFaceFeature] {
 
-            print("Found bounds are \(face.bounds)")
+            //print("Found bounds are \(face.bounds)")
             
             // Apply the transform to convert the coordinates
             var faceViewBounds = face.bounds.applying(transform)
@@ -44,10 +50,14 @@ class ViewController: UIViewController {
             faceViewBounds.origin.x += offsetX
             faceViewBounds.origin.y += offsetY
             
+            xArray.append(faceViewBounds.origin.x)
+            yArray.append(faceViewBounds.origin.y)
+            heightArray.append(faceViewBounds.width)
+            widthArray.append(faceViewBounds.height)
             
             let faceBox = UIView(frame: faceViewBounds)
 
-            faceBox.layer.borderWidth = 3
+            faceBox.layer.borderWidth = 1
             faceBox.layer.borderColor = UIColor.red.cgColor
             faceBox.backgroundColor = UIColor.clear
             personPic.addSubview(faceBox)
@@ -60,11 +70,11 @@ class ViewController: UIViewController {
             self.view.addSubview(button)
             
             if face.hasLeftEyePosition {
-                print("Left eye bounds are \(face.leftEyePosition)")
+               // print("Left eye bounds are \(face.leftEyePosition)")
             }
             
             if face.hasRightEyePosition {
-                print("Right eye bounds are \(face.rightEyePosition)")
+               // print("Right eye bounds are \(face.rightEyePosition)")
             }
         }
     }
@@ -73,11 +83,24 @@ class ViewController: UIViewController {
         
         sender.alpha = 0.5
         sender.backgroundColor = .lightGray
+
        /* let darkBlur = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
         let blur = UIBlurEffect(style: UIBlurEffectStyle.light)
         let effectView:UIVisualEffectView = UIVisualEffectView (effect: darkBlur)
         effectView.frame = CGRect(x: sender.frame.minX, y: sender.frame.minY, width: (sender.frame.maxX - sender.frame.minX), height: (sender.frame.maxY - sender.frame.minY))
         personPic.addSubview(effectView)*/
+    }
+    
+    func createBlur(){
+        for i in 0..<xArray.count{
+            let darkBlur = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
+            let blur = UIBlurEffect(style: UIBlurEffectStyle.light)
+            let effectView:UIVisualEffectView = UIVisualEffectView (effect: blur)
+            effectView.frame = CGRect(x: xArray[i], y: yArray[i], width: widthArray[i], height: heightArray[i])
+            effectView.tag
+            personPic.addSubview(effectView)
+            
+        }
     }
 }
 
