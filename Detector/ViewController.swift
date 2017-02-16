@@ -8,11 +8,21 @@ class ViewController: UIViewController {
     var yArray = [CGFloat]()
     var widthArray = [CGFloat]()
     var heightArray = [CGFloat]()
+    var rightEyeArray = [CGPoint]()
+    var leftEyeArray = [CGPoint]()
+    
+    let extraLight = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
+    let light = UIBlurEffect(style: UIBlurEffectStyle.light)
+    let dark = UIBlurEffect(style: UIBlurEffectStyle.dark)
+    let regular = UIBlurEffect(style: UIBlurEffectStyle.regular)
+    let prominent = UIBlurEffect(style: UIBlurEffectStyle.prominent)
+
+    var blurColor:UIBlurEffect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        personPic.image = UIImage(named: "face-2")
+        personPic.image = UIImage(named: "face-5")
         detect()
         createBlur()
     }
@@ -31,6 +41,8 @@ class ViewController: UIViewController {
         let ciImageSize = personciImage.extent.size
         var transform = CGAffineTransform(scaleX: 1, y: -1)
         transform = transform.translatedBy(x: 0, y: -ciImageSize.height)
+        
+        var i = 0
         
         for face in faces as! [CIFaceFeature] {
 
@@ -54,19 +66,26 @@ class ViewController: UIViewController {
             yArray.append(faceViewBounds.origin.y)
             heightArray.append(faceViewBounds.width)
             widthArray.append(faceViewBounds.height)
+            rightEyeArray.append(face.rightEyePosition)
+            leftEyeArray.append(face.leftEyePosition)
+            
+            print(leftEyeArray)
             
             let faceBox = UIView(frame: faceViewBounds)
 
-            faceBox.layer.borderWidth = 1
+            /*faceBox.layer.borderWidth = 1
             faceBox.layer.borderColor = UIColor.red.cgColor
             faceBox.backgroundColor = UIColor.clear
-            personPic.addSubview(faceBox)
+            faceBox.tag = i
+            personPic.addSubview(faceBox)*/
 
             let button = UIButton()
             button.frame = (frame: CGRect(x: faceViewBounds.origin.x, y: faceViewBounds.origin.y, width: faceViewBounds.width, height: faceViewBounds.height))
             //button.backgroundColor = UIColor.clear
-            button.setTitle("Name your Button ", for: .normal)
             button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+            button.tag = i
+            button.setTitle("", for: .normal)
+            //button.isHidden = true
             self.view.addSubview(button)
             
             if face.hasLeftEyePosition {
@@ -76,32 +95,114 @@ class ViewController: UIViewController {
             if face.hasRightEyePosition {
                // print("Right eye bounds are \(face.rightEyePosition)")
             }
+            i += 1
         }
     }
     
     func buttonAction(sender: UIButton!, x: Int) {
         
-        sender.alpha = 0.5
-        sender.backgroundColor = .lightGray
-
-       /* let darkBlur = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
-        let blur = UIBlurEffect(style: UIBlurEffectStyle.light)
-        let effectView:UIVisualEffectView = UIVisualEffectView (effect: darkBlur)
-        effectView.frame = CGRect(x: sender.frame.minX, y: sender.frame.minY, width: (sender.frame.maxX - sender.frame.minX), height: (sender.frame.maxY - sender.frame.minY))
-        personPic.addSubview(effectView)*/
+        //if subview exist -remove
+        //else create
+        let views = personPic.subviews as! [UIVisualEffectView]
+        /*for v in personPic.subviews {
+            if v.tag == sender.tag {
+                v.removeFromSuperview()
+            }
+            else {
+                let effectView:UIVisualEffectView = UIVisualEffectView (effect: dark)
+                effectView.frame = CGRect(x: xArray[sender.tag], y: yArray[sender.tag], width: widthArray[sender.tag], height: heightArray[sender.tag])
+                effectView.layer.cornerRadius = effectView.frame.size.width/2
+                effectView.clipsToBounds = true
+                effectView.tag = sender.tag
+                effectView.isHidden = false
+                personPic.addSubview(effectView)
+                
+            }
+        }*/
+        
+        for v in views {
+            if v.tag == sender.tag {
+                if v.isHidden{
+                    v.effect = blurColor
+                    v.isHidden = false
+                    /*v.backgroundColor = UIColor.gray
+                    v.layer.opacity = 0.7
+                    v.layer.cornerRadius = v.frame.size.width/2*/
+                    
+                    //v.isHidden =  v.isHidden ? false : true
+                }
+                else {
+                    v.isHidden = true
+                    
+                    /*let effectView:UIVisualEffectView = UIVisualEffectView (effect: light)
+                     effectView.frame = CGRect(x: xArray[sender.tag], y: yArray[sender.tag], width: widthArray[sender.tag], height: heightArray[sender.tag])
+                     effectView.layer.cornerRadius = effectView.frame.size.width/2
+                     effectView.clipsToBounds = true
+                     
+                     effectView.tag = sender.tag
+                     //effectView.isHidden = true
+                     personPic.addSubview(effectView)*/
+                }
+            }
+        }
+        
+        //sender.alpha = 0.5
+        //sender.backgroundColor = .lightGray
+        
+        /* let darkBlur = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
+         let blur = UIBlurEffect(style: UIBlurEffectStyle.light)
+         let effectView:UIVisualEffectView = UIVisualEffectView (effect: darkBlur)
+         effectView.frame = CGRect(x: sender.frame.minX, y: sender.frame.minY, width: (sender.frame.maxX - sender.frame.minX), height: (sender.frame.maxY - sender.frame.minY))
+         personPic.addSubview(effectView)*/
     }
     
     func createBlur(){
         for i in 0..<xArray.count{
-            let darkBlur = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
-            let blur = UIBlurEffect(style: UIBlurEffectStyle.light)
-            let effectView:UIVisualEffectView = UIVisualEffectView (effect: blur)
+            let effectView:UIVisualEffectView = UIVisualEffectView(effect: blurColor)
             effectView.frame = CGRect(x: xArray[i], y: yArray[i], width: widthArray[i], height: heightArray[i])
-            effectView.tag
+            effectView.layer.cornerRadius = effectView.frame.size.width/2
+            effectView.clipsToBounds = true
+            effectView.tag = i
+            effectView.isHidden = true
             personPic.addSubview(effectView)
-            
         }
+        
+        
+       /* for i in 0..<xArray.count{
+            let effectView:UIVisualEffectView = UIVisualEffectView (effect: dark)
+            print(leftEyeArray[i].x)
+            effectView.frame = CGRect(x: leftEyeArray[i].x-200, y: yArray[i], width: widthArray[i], height: heightArray[i])
+            
+            effectView.tag = i
+            effectView.isHidden = true
+            personPic.addSubview(effectView)
+        }*/
     }
+    
+    @IBAction func extraLight(_ sender: Any) {
+        blurColor = extraLight
+    }
+    
+    @IBAction func light(_ sender: Any) {
+        blurColor = light
+
+    }
+    
+    @IBAction func Dark(_ sender: Any) {
+        blurColor = dark
+
+    }
+    
+    @IBAction func regular(_ sender: Any) {
+        blurColor = regular
+        
+    }
+    
+    @IBAction func prominent(_ sender: Any) {
+        blurColor = prominent
+    }
+    
+    
 }
 
 /*4 options
@@ -112,8 +213,13 @@ class ViewController: UIViewController {
  
  make changes to button iteself?
  append dettected face values into array- creating another array of images
+ make array if image views????
  */
+/*d
+profilePictureView.clipsToBounds = true
 
+profilePictureView.layer.borderColor = UIColor.whiteColor().CGColor
+profilePictureView.layer.borderWidth = 5.0*/
 
 
 
