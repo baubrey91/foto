@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     let prominent = UIBlurEffect(style: UIBlurEffectStyle.prominent)
 
     var blurColor:UIBlurEffect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
+    var opacity:Float = 1.0
+    var currentFace = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,10 +102,19 @@ class ViewController: UIViewController {
     }
     
     func buttonAction(sender: UIButton!, x: Int) {
+        currentFace = sender.tag
+        blurFace()
         
+        for v in personPic.subviews {
+            if v.tag == sender.tag {
+                v.isHidden = (v.isHidden) ? false : true
+            }
+            
+        }
         //if subview exist -remove
         //else create
-        let views = personPic.subviews as! [UIVisualEffectView]
+        /*let views = personPic.subviews as! [UIVisualEffectView]
+        //let views = personPic.subviews
         /*for v in personPic.subviews {
             if v.tag == sender.tag {
                 v.removeFromSuperview()
@@ -125,9 +136,9 @@ class ViewController: UIViewController {
                 if v.isHidden{
                     v.effect = blurColor
                     v.isHidden = false
-                    /*v.backgroundColor = UIColor.gray
-                    v.layer.opacity = 0.7
-                    v.layer.cornerRadius = v.frame.size.width/2*/
+                    v.backgroundColor = UIColor.gray
+                    v.layer.opacity = opacity
+                    v.layer.cornerRadius = v.frame.size.width/2
                     
                     //v.isHidden =  v.isHidden ? false : true
                 }
@@ -153,7 +164,44 @@ class ViewController: UIViewController {
          let blur = UIBlurEffect(style: UIBlurEffectStyle.light)
          let effectView:UIVisualEffectView = UIVisualEffectView (effect: darkBlur)
          effectView.frame = CGRect(x: sender.frame.minX, y: sender.frame.minY, width: (sender.frame.maxX - sender.frame.minX), height: (sender.frame.maxY - sender.frame.minY))
-         personPic.addSubview(effectView)*/
+         personPic.addSubview(effectView)*/*/
+    }
+    
+    func blurFace() {
+        let views = personPic.subviews as! [UIVisualEffectView]
+        //let views = personPic.subviews
+        /*for v in personPic.subviews {
+         if v.tag == sender.tag {
+         v.removeFromSuperview()
+         }
+         else {
+         let effectView:UIVisualEffectView = UIVisualEffectView (effect: dark)
+         effectView.frame = CGRect(x: xArray[sender.tag], y: yArray[sender.tag], width: widthArray[sender.tag], height: heightArray[sender.tag])
+         effectView.layer.cornerRadius = effectView.frame.size.width/2
+         effectView.clipsToBounds = true
+         effectView.tag = sender.tag
+         effectView.isHidden = false
+         personPic.addSubview(effectView)
+         
+         }
+         }*/
+        
+        for v in views {
+            if v.tag == currentFace {
+                //if v.isHidden{
+                    v.effect = blurColor
+                    //v.isHidden = false
+                    v.backgroundColor = UIColor.gray
+                    v.layer.opacity = opacity
+                    v.layer.cornerRadius = v.frame.size.width/2
+                    
+                    //v.isHidden =  v.isHidden ? false : true
+               // }
+               // else {
+               //     v.isHidden = true
+                //}
+            }
+        }
     }
     
     func createBlur(){
@@ -202,6 +250,11 @@ class ViewController: UIViewController {
         blurColor = prominent
     }
     
+    @IBAction func opacitySlider(_ sender: UISlider) {
+        print(sender.value)
+        opacity = sender.value
+        blurFace()
+    }
     
 }
 
