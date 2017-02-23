@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        personPic.image = UIImage(named: "face-1")
+        personPic.image = UIImage(named: "face-5")
         detect()
         createBlur()
     }
