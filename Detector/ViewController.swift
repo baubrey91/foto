@@ -1,8 +1,9 @@
 import UIKit
 import CoreImage
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIPopoverPresentationControllerDelegate, filterDelegate {
     @IBOutlet weak var personPic: UIImageView!
+    @IBOutlet weak var filterButton: UIButton!
     
     var xArray          = [CGFloat]()
     var yArray          = [CGFloat]()
@@ -11,11 +12,11 @@ class ViewController: UIViewController {
     var rightEyeArray   = [CGPoint]()
     var leftEyeArray    = [CGPoint]()
     
-    let extraLight      = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
-    let light           = UIBlurEffect(style: UIBlurEffectStyle.light)
-    let dark            = UIBlurEffect(style: UIBlurEffectStyle.dark)
-    let regular         = UIBlurEffect(style: UIBlurEffectStyle.regular)
-    let prominent       = UIBlurEffect(style: UIBlurEffectStyle.prominent)
+    let blurArray = [UIBlurEffect(style: UIBlurEffectStyle.extraLight),
+                     UIBlurEffect(style: UIBlurEffectStyle.light),
+                     UIBlurEffect(style: UIBlurEffectStyle.dark),
+                     UIBlurEffect(style: UIBlurEffectStyle.regular),
+                     UIBlurEffect(style: UIBlurEffectStyle.prominent)]
 
     var blurColor:UIBlurEffect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
     var opacity:Float = 1.0
@@ -34,6 +35,10 @@ class ViewController: UIViewController {
         guard let personciImage = CIImage(image: personPic.image!) else {
             return
         }
+        
+        let ratio = self.personPic.bounds.height / self.view.bounds.height
+        let ratio2 =  self.view.bounds.height / self.personPic.bounds.height
+
 
         let accuracy = [CIDetectorAccuracy: CIDetectorAccuracyHigh]
         let faceDetector = CIDetector(ofType: CIDetectorTypeFace, context: nil, options: accuracy)
@@ -41,12 +46,8 @@ class ViewController: UIViewController {
 
         // For converting the Core Image Coordinates to UIView Coordinates
         let ciImageSize = personciImage.extent.size
-        print(personciImage.extent.height)
-        print(personciImage.extent.width)
         var transform = CGAffineTransform(scaleX: 1, y: -1)
         transform = transform.translatedBy(x: 0, y: -ciImageSize.height)
-        print(-ciImageSize.height)
-        //-507 plus size and regular size
         
         var i = 0
         
@@ -59,9 +60,13 @@ class ViewController: UIViewController {
             
             // Calculate the actual position and size of the rectangle in the image view
             let viewSize = personPic.bounds.size
+            print(viewSize.width)
+            print(ciImageSize.width)
+            print(viewSize.height)
+            print(ciImageSize.height)
             let scale = min(viewSize.width / ciImageSize.width,
                             viewSize.height / ciImageSize.height)
-            let offsetX = (viewSize.width - ciImageSize.width * scale) / 2
+            let offsetX = (viewSize.width - ciImageSize.width * scale) / 2 //1.1 0.5
             let offsetY = (viewSize.height - ciImageSize.height * scale) / 2
             
             faceViewBounds = faceViewBounds.applying(CGAffineTransform(scaleX: scale, y: scale))
@@ -147,27 +152,24 @@ class ViewController: UIViewController {
         
     }
     
-    @IBAction func extraLight(_ sender: Any) {
-        blurColor = extraLight
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "popoverSegue" {
+            if let popoverTBC = segue.destination as? FiltersTableView{
+                popoverTBC.preferredContentSize = CGSize(width: 200, height: 300)
+                popoverTBC.referencedButton = sender as! UIButton
+                popoverTBC.delegate = self
+                popoverTBC.popoverPresentationController?.delegate = self
+            }
+        }
     }
     
-    @IBAction func light(_ sender: Any) {
-        blurColor = light
-
+    func filterSelected(button: UIButton, filter: String, filterIndex: Int) {
+        filterButton.setTitle(filter, for: .normal)
+        blurColor = blurArray[filterIndex]
     }
     
-    @IBAction func Dark(_ sender: Any) {
-        blurColor = dark
-
-    }
-    
-    @IBAction func regular(_ sender: Any) {
-        blurColor = regular
-        
-    }
-    
-    @IBAction func prominent(_ sender: Any) {
-        blurColor = prominent
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
     }
     
     @IBAction func opacitySlider(_ sender: UISlider) {
