@@ -8,15 +8,16 @@
 
 import UIKit
 
-protocol filterDelegate {
-    func filterSelected(button: UIButton, filter: String, filterIndex: Int)
+protocol optionsDelegate {
+    var blurIndex: Int {get set}
+    var isSquared: Bool {get set}
 }
 
 class FiltersTableView: UITableViewController {
     
-    let filtersArray = ["extraLight", "light", "dark", "regular", "prominent"]
+    let optionsArray = ["FILTERS","extraLight", "light", "dark", "regular", "prominent", "SHAPE", "square blurs", "circular blurs", "PHOTOS", "Camera", "Photo Album", "Save"]
     
-    var delegate: filterDelegate? = nil
+    var delegate: optionsDelegate? = nil
     var referencedButton: UIButton!
 
     override func viewDidLoad() {
@@ -33,19 +34,44 @@ class FiltersTableView: UITableViewController {
 
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filtersArray.count
+        return optionsArray.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = filtersArray[indexPath.row]
+        cell.textLabel?.text = optionsArray[indexPath.row]
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if delegate != nil {
-            delegate?.filterSelected(button: referencedButton, filter: filtersArray[indexPath.row], filterIndex: indexPath.row)
+        switch indexPath.row{
+        case 1, 2, 3, 4, 5:
+            if delegate != nil {
+                delegate?.blurIndex = indexPath.row - 1
+
+                //delegate?.filterSelected(filterIndex: indexPath.row - 1)
+            }
+        case 7:
+            if delegate != nil {
+                delegate?.isSquared = true
+//                delegate?.shapeSelected(isSquared: true)
+            }
+        case 8:
+            if delegate != nil {
+                delegate?.isSquared = false
+//                delegate?.shapeSelected(isSquared: false)
+            }
+        case 10:
+            if delegate != nil {
+//                delegate?.shapeSelected(isSquared: false)
+            }
+        case 11:
+            if delegate != nil {
+//                delegate?.shapeSelected(isSquared: false)
+            }
+        default:
+            break
         }
         dismiss(animated: true, completion: nil)
     }

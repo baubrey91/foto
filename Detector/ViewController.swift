@@ -1,10 +1,11 @@
 import UIKit
 import CoreImage
 
-class ViewController: UIViewController, UIPopoverPresentationControllerDelegate, filterDelegate {
+class ViewController: UIViewController, UIPopoverPresentationControllerDelegate, optionsDelegate {
     @IBOutlet weak var personPic: UIImageView!
     @IBOutlet weak var filterButton: UIButton!
-    
+
+    @IBOutlet weak var filterBottomButton: UIBarButtonItem!
     var xArray          = [CGFloat]()
     var yArray          = [CGFloat]()
     var widthArray      = [CGFloat]()
@@ -21,6 +22,8 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
     var blurColor:UIBlurEffect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
     var opacity:Float = 1.0
     var currentFace = 0
+    var blurIndex = 0
+    var isSquared = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,10 +38,6 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
         guard let personciImage = CIImage(image: personPic.image!) else {
             return
         }
-        
-        let ratio = self.personPic.bounds.height / self.view.bounds.height
-        let ratio2 =  self.view.bounds.height / self.personPic.bounds.height
-
 
         let accuracy = [CIDetectorAccuracy: CIDetectorAccuracyHigh]
         let faceDetector = CIDetector(ofType: CIDetectorTypeFace, context: nil, options: accuracy)
@@ -60,10 +59,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
             
             // Calculate the actual position and size of the rectangle in the image view
             let viewSize = personPic.bounds.size
-            print(viewSize.width)
-            print(ciImageSize.width)
-            print(viewSize.height)
-            print(ciImageSize.height)
+
             let scale = min(viewSize.width / ciImageSize.width,
                             viewSize.height / ciImageSize.height)
             let offsetX = (viewSize.width - ciImageSize.width * scale) / 2 //1.1 0.5
@@ -73,13 +69,6 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
             faceViewBounds.origin.x += offsetX
             faceViewBounds.origin.y += offsetY
             
-            print("viewwidth : \(viewSize.width)")
-            print("viewheight : \(viewSize.height)")
-            print("CIwidth : \(ciImageSize.width)")
-            print("CIheight : \(ciImageSize.height)")
-
-            print(UIScreen.main.bounds.size.width)
-            
             xArray.append(faceViewBounds.origin.x)
             yArray.append(faceViewBounds.origin.y)
             heightArray.append(faceViewBounds.width)
@@ -88,12 +77,12 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
             leftEyeArray.append(face.leftEyePosition)
             
             let faceBox = UIView(frame: faceViewBounds)
-
-            faceBox.layer.borderWidth = 1
-            faceBox.layer.borderColor = UIColor.red.cgColor
-            faceBox.backgroundColor = UIColor.clear
-            faceBox.tag = i
-            personPic.addSubview(faceBox)
+//
+//            faceBox.layer.borderWidth = 1
+//            faceBox.layer.borderColor = UIColor.red.cgColor
+//            faceBox.backgroundColor = UIColor.clear
+//            faceBox.tag = i
+//            personPic.addSubview(faceBox)
 
             let button = UIButton()
             button.frame = (frame: faceViewBounds)
@@ -123,12 +112,17 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
             if v.tag == sender.tag {
                 v.isHidden = (v.isHidden) ? false : true
             }
+            if !isSquared {
+                v.layer.cornerRadius = v.frame.size.width/2
+            } else {
+                v.layer.cornerRadius = v.frame.size.width
+            }
         }
     }
     
     func blurFace() {
         let views = personPic.subviews as! [UIVisualEffectView]
-        
+        let blurColor = blurArray[blurIndex]
         for v in views {
             if v.tag == currentFace {
                 v.effect = blurColor
@@ -156,17 +150,21 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
         if segue.identifier == "popoverSegue" {
             if let popoverTBC = segue.destination as? FiltersTableView{
                 popoverTBC.preferredContentSize = CGSize(width: 200, height: 300)
-                popoverTBC.referencedButton = sender as! UIButton
+               // popoverTBC.referencedButton = sender as! UIButton
                 popoverTBC.delegate = self
                 popoverTBC.popoverPresentationController?.delegate = self
             }
         }
     }
     
-    func filterSelected(button: UIButton, filter: String, filterIndex: Int) {
-        filterButton.setTitle(filter, for: .normal)
-        blurColor = blurArray[filterIndex]
-    }
+//    func filterSelected(filterIndex: Int) {
+//        print(filterIndex)
+//        blurColor = blurArray[filterIndex]
+//    }
+//    
+//    func shapeSelected(isSquared: Bool) {
+//        isSquare = isSquared
+//    }
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.none
@@ -175,6 +173,11 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
     @IBAction func opacitySlider(_ sender: UISlider) {
         opacity = sender.value
         blurFace()
+    }
+    @IBAction func printout(_ sender: Any) {
+        
+        print(blurIndex)
+        print(isSquared)
     }
 }
 
