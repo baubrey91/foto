@@ -149,8 +149,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "popoverSegue" {
             if let popoverTBC = segue.destination as? FiltersTableView{
-                popoverTBC.preferredContentSize = CGSize(width: 200, height: 300)
-               // popoverTBC.referencedButton = sender as! UIButton
+                popoverTBC.preferredContentSize = CGSize(width: 175, height: 450)
                 popoverTBC.delegate = self
                 popoverTBC.popoverPresentationController?.delegate = self
             }
@@ -174,11 +173,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
         opacity = sender.value
         blurFace()
     }
-    @IBAction func printout(_ sender: Any) {
-        
-        print(blurIndex)
-        print(isSquared)
-    }
+
 }
 
 

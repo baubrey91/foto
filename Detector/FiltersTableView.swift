@@ -15,7 +15,8 @@ protocol optionsDelegate {
 
 class FiltersTableView: UITableViewController {
     
-    let optionsArray = ["FILTERS","extraLight", "light", "dark", "regular", "prominent", "SHAPE", "square blurs", "circular blurs", "PHOTOS", "Camera", "Photo Album", "Save"]
+    let optionsArray = ["extraLight", "light", "dark", "regular", "prominent", "square blurs", "circular blurs", "Camera", "Photo Album", "Save"]
+    //let optionsArray = ["FILTERS","extraLight", "light", "dark", "regular", "prominent", "SHAPE", "square blurs", "circular blurs", "PHOTOS", "Camera", "Photo Album", "Save"]
     
     var delegate: optionsDelegate? = nil
     var referencedButton: UIButton!
@@ -46,30 +47,19 @@ class FiltersTableView: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row{
-        case 1, 2, 3, 4, 5:
+        case 0, 1, 2, 3, 4:
             if delegate != nil {
-                delegate?.blurIndex = indexPath.row - 1
-
-                //delegate?.filterSelected(filterIndex: indexPath.row - 1)
-            }
+                delegate?.blurIndex = indexPath.row - 1}
+        case 5:
+            if delegate != nil {
+                delegate?.isSquared = true}
+        case 6:
+            if delegate != nil {
+                delegate?.isSquared = false}
         case 7:
-            if delegate != nil {
-                delegate?.isSquared = true
-//                delegate?.shapeSelected(isSquared: true)
-            }
+            if delegate != nil { }
         case 8:
-            if delegate != nil {
-                delegate?.isSquared = false
-//                delegate?.shapeSelected(isSquared: false)
-            }
-        case 10:
-            if delegate != nil {
-//                delegate?.shapeSelected(isSquared: false)
-            }
-        case 11:
-            if delegate != nil {
-//                delegate?.shapeSelected(isSquared: false)
-            }
+            if delegate != nil { }
         default:
             break
         }

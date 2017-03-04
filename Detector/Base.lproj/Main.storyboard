@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Qdi-1W-4vN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="lBR-OP-XY1">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -185,30 +185,28 @@
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="Item" id="3X3-px-uXj"/>
-                                    <barButtonItem title="Item" id="CbH-Fl-i0O">
-                                        <connections>
-                                            <action selector="printout:" destination="Qdi-1W-4vN" id="jac-4l-uAE"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem title="Select Filter" id="Esc-pG-WmQ">
+                                    <barButtonItem title="Options" id="Esc-pG-WmQ">
                                         <connections>
                                             <segue destination="bSB-ST-nLG" kind="popoverPresentation" identifier="popoverSegue" popoverAnchorBarButtonItem="Esc-pG-WmQ" id="BWD-KA-dYZ">
                                                 <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                             </segue>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem style="plain" id="Pgg-UN-dEj">
-                                        <progressView key="customView" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" id="Dk9-ds-JWp">
-                                            <rect key="frame" x="205" y="21" width="139" height="3"/>
+                                    <barButtonItem style="plain" id="Ioh-N0-Qeg">
+                                        <slider key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" id="9KG-wP-Dig">
+                                            <rect key="frame" x="86" y="7" width="229" height="31"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </progressView>
+                                            <connections>
+                                                <action selector="opacitySlider:" destination="Qdi-1W-4vN" eventType="valueChanged" id="dFq-qw-gza"/>
+                                            </connections>
+                                        </slider>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="bCw-Pw-lJ6"/>
                     <connections>
                         <outlet property="filterBottomButton" destination="Esc-pG-WmQ" id="oor-Dl-WwG"/>
                         <outlet property="personPic" destination="XG8-G3-2a0" id="dYg-c8-Bnc"/>
@@ -216,14 +214,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cDx-s1-t0Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="909" y="1377"/>
+            <point key="canvasLocation" x="1847.2" y="1376.7616191904049"/>
         </scene>
         <!--Filters Table View-->
         <scene sceneID="Wtl-kQ-eOe">
             <objects>
                 <tableViewController id="bSB-ST-nLG" customClass="FiltersTableView" customModule="Detector" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ydL-S8-uFX">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="550"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -242,13 +240,31 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="V8m-KL-vkg"/>
-                    <value key="contentSizeForViewInPopover" type="size" width="300" height="300"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="300" height="550"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="300" height="300"/>
+                    <size key="freeformSize" width="300" height="550"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z6j-xA-A43" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1016" y="1970"/>
+            <point key="canvasLocation" x="1824" y="2101"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="kkc-as-83k">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lBR-OP-XY1" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Djn-Tt-Rgq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Qdi-1W-4vN" kind="relationship" relationship="rootViewController" id="sfc-kw-Tfq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Spm-TU-bhm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="908" y="1376.7616191904049"/>
         </scene>
     </scenes>
     <resources>
