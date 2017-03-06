@@ -11,6 +11,8 @@ import UIKit
 protocol optionsDelegate {
     var blurIndex: Int {get set}
     var isSquared: Bool {get set}
+    func getSavedImage()
+    func screenShotMethod()
 }
 
 class FiltersTableView: UITableViewController {
@@ -57,13 +59,18 @@ class FiltersTableView: UITableViewController {
             if delegate != nil {
                 delegate?.isSquared = false}
         case 7:
-            if delegate != nil { }
+            dismiss(animated: true, completion: nil)
+
+            if delegate != nil {
+                delegate?.getSavedImage()}
         case 8:
-            if delegate != nil { }
+            if delegate != nil {
+                delegate?.screenShotMethod()}
         default:
             break
         }
         dismiss(animated: true, completion: nil)
     }
 
+    
 }

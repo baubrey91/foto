@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="lBR-OP-XY1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7jB-Y7-poR">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -68,7 +68,7 @@
                                 <rect key="frame" x="0.0" y="28" width="300" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OFD-5S-Z5J" id="Zok-Hl-OQs">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -185,21 +185,21 @@
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
+                                    <barButtonItem style="plain" id="Ioh-N0-Qeg">
+                                        <slider key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" id="9KG-wP-Dig">
+                                            <rect key="frame" x="14" y="7" width="229" height="31"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <connections>
+                                                <action selector="opacitySlider:" destination="Qdi-1W-4vN" eventType="valueChanged" id="dFq-qw-gza"/>
+                                            </connections>
+                                        </slider>
+                                    </barButtonItem>
                                     <barButtonItem title="Options" id="Esc-pG-WmQ">
                                         <connections>
                                             <segue destination="bSB-ST-nLG" kind="popoverPresentation" identifier="popoverSegue" popoverAnchorBarButtonItem="Esc-pG-WmQ" id="BWD-KA-dYZ">
                                                 <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                             </segue>
                                         </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" id="Ioh-N0-Qeg">
-                                        <slider key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" id="9KG-wP-Dig">
-                                            <rect key="frame" x="86" y="7" width="229" height="31"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <connections>
-                                                <action selector="opacitySlider:" destination="Qdi-1W-4vN" eventType="valueChanged" id="dFq-qw-gza"/>
-                                            </connections>
-                                        </slider>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
@@ -210,11 +210,12 @@
                     <connections>
                         <outlet property="filterBottomButton" destination="Esc-pG-WmQ" id="oor-Dl-WwG"/>
                         <outlet property="personPic" destination="XG8-G3-2a0" id="dYg-c8-Bnc"/>
+                        <outlet property="tooBar" destination="NMn-ld-9Yx" id="9aM-S7-syB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cDx-s1-t0Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1847.2" y="1376.7616191904049"/>
+            <point key="canvasLocation" x="2786.4000000000001" y="1376.7616191904049"/>
         </scene>
         <!--Filters Table View-->
         <scene sceneID="Wtl-kQ-eOe">
@@ -229,7 +230,7 @@
                                 <rect key="frame" x="0.0" y="28" width="300" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="guO-gB-j0A" id="DO5-cf-BDS">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -246,25 +247,25 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z6j-xA-A43" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1824" y="2101"/>
+            <point key="canvasLocation" x="2786" y="2160"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="kkc-as-83k">
+        <scene sceneID="nyg-Sz-5OD">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lBR-OP-XY1" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7jB-Y7-poR" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Djn-Tt-Rgq">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UxZ-8e-sgh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Qdi-1W-4vN" kind="relationship" relationship="rootViewController" id="sfc-kw-Tfq"/>
+                        <segue destination="Qdi-1W-4vN" kind="relationship" relationship="rootViewController" id="0u6-e1-HgI"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Spm-TU-bhm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="by3-MG-Lri" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="908" y="1376.7616191904049"/>
+            <point key="canvasLocation" x="1847.2" y="1376.7616191904049"/>
         </scene>
     </scenes>
     <resources>

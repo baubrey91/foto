@@ -1,11 +1,13 @@
 import UIKit
 import CoreImage
 
-class ViewController: UIViewController, UIPopoverPresentationControllerDelegate, optionsDelegate {
+class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, optionsDelegate {
     @IBOutlet weak var personPic: UIImageView!
     @IBOutlet weak var filterButton: UIButton!
-
     @IBOutlet weak var filterBottomButton: UIBarButtonItem!
+    @IBOutlet weak var toolBar: UIToolbar!
+    
+    
     var xArray          = [CGFloat]()
     var yArray          = [CGFloat]()
     var widthArray      = [CGFloat]()
@@ -112,11 +114,6 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
             if v.tag == sender.tag {
                 v.isHidden = (v.isHidden) ? false : true
             }
-            if !isSquared {
-                v.layer.cornerRadius = v.frame.size.width/2
-            } else {
-                v.layer.cornerRadius = v.frame.size.width
-            }
         }
     }
     
@@ -128,7 +125,13 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
                 v.effect = blurColor
                 v.backgroundColor = UIColor.gray
                 v.layer.opacity = opacity
-                v.layer.cornerRadius = v.frame.size.width/2
+                if !isSquared {
+                    v.layer.cornerRadius = v.frame.size.width/2
+                    v.clipsToBounds = true
+                } else {
+                    v.layer.cornerRadius = v.frame.size.width
+                    v.clipsToBounds = false
+                }
             }
         }
     }
@@ -137,8 +140,8 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
         for i in 0..<xArray.count{
             let effectView:UIVisualEffectView = UIVisualEffectView(effect: blurColor)
             effectView.frame = CGRect(x: xArray[i], y: yArray[i], width: widthArray[i], height: heightArray[i])
-            effectView.layer.cornerRadius = effectView.frame.size.width/2
-            effectView.clipsToBounds = true
+            /*effectView.layer.cornerRadius = effectView.frame.size.width/2
+            effectView.clipsToBounds = true*/
             effectView.tag = i
             effectView.isHidden = true
             personPic.addSubview(effectView)
@@ -155,6 +158,57 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
             }
         }
     }
+    @IBAction func camera(_ sender: Any) {
+        let picker = UIImagePickerController()
+        picker.allowsEditing = true
+        picker.delegate = self
+        present(picker, animated: true)
+
+    }
+    
+    func getSavedImage() {
+        let picker = UIImagePickerController()
+        picker.allowsEditing = true
+        picker.delegate = self
+        present(picker, animated: true)
+    }
+    
+    func screenShotMethod() {
+        self.toolBar.layer.backgroundColor = UIColor.clear.cgColor
+        //self.
+        //Create the UIImage
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        //Save it to the camera roll
+        UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        guard let image = info[UIImagePickerControllerEditedImage] as? UIImage else { return }
+        
+        dismiss(animated: true)
+    
+        let views = personPic.subviews as! [UIVisualEffectView]
+        
+        for v in views {
+            v.removeFromSuperview()
+        }
+        
+        personPic.image = image
+        
+        detect()
+        createBlur()
+        
+        //let beginImage = CIImage(image: currentImage)
+        //currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
+        
+        //applyProcessing()
+    }
+    
+    
     
 //    func filterSelected(filterIndex: Int) {
 //        print(filterIndex)
