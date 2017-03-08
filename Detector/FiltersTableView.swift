@@ -1,11 +1,3 @@
-//
-//  FiltersTableView.swift
-//  Detector
-//
-//  Created by Brandon on 2/27/17.
-//  Copyright © 2017 Gregg Mojica. All rights reserved.
-//
-
 import UIKit
 
 protocol optionsDelegate {
@@ -17,7 +9,7 @@ protocol optionsDelegate {
 
 class FiltersTableView: UITableViewController {
     
-    let optionsArray = ["ExtraLight", "Light", "Dark", "Regular", "Prominent", "Square Blurs", "Circular Blurs", "Camera", "Photo Album", "Save","FindFaces"]
+    let optionsArray = ["ExtraLight", "Light", "Dark", "Regular", "Prominent", "Square Blurs", "Circular Blurs", "Take Photo", "Import Photo", "Save"]
     //let optionsArray = ["FILTERS","extraLight", "light", "dark", "regular", "prominent", "SHAPE", "square blurs", "circular blurs", "PHOTOS", "Camera", "Photo Album", "Save"]
     
     var delegate: optionsDelegate? = nil
@@ -33,8 +25,6 @@ class FiltersTableView: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
-
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return optionsArray.count
@@ -44,6 +34,14 @@ class FiltersTableView: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = optionsArray[indexPath.row]
+        switch indexPath.row {
+        case 5,6:
+            cell.backgroundColor = UIColor.blue
+        case 7, 8, 9:
+            cell.backgroundColor = UIColor.green
+        default:
+            cell.backgroundColor = UIColor.lightGray
+        }
         return cell
     }
     
