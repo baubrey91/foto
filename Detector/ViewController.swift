@@ -1,7 +1,7 @@
 import UIKit
 import CoreImage
 
-class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, optionsDelegate {
+class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var personPic: UIImageView!
     @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var filterBottomButton: UIBarButtonItem!
@@ -23,14 +23,15 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
 
     var blurColor:UIBlurEffect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
     var opacity:Float = 1.0
-    var currentFace = 0
-    var blurIndex = 0
-    var isSquared = false
+    var currentFace =   0
+    var blurIndex =     0
+    var isSquared =     false
+    var faceBox =       false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        personPic.image = UIImage(named: "face-5")
+        personPic.image = UIImage(named: "stock")
         detect()
         createBlur()
     }
@@ -50,7 +51,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
         var transform = CGAffineTransform(scaleX: 1, y: -1)
         transform = transform.translatedBy(x: 0, y: -ciImageSize.height)
         
-        var i = 0
+        var index = 0
         
         for face in faces as! [CIFaceFeature] {
 
@@ -78,31 +79,27 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
             rightEyeArray.append(face.rightEyePosition)
             leftEyeArray.append(face.leftEyePosition)
             
-            let faceBox = UIView(frame: faceViewBounds)
-//
-//            faceBox.layer.borderWidth = 1
-//            faceBox.layer.borderColor = UIColor.red.cgColor
-//            faceBox.backgroundColor = UIColor.clear
-//            faceBox.tag = i
-//            personPic.addSubview(faceBox)
-
-            let button = UIButton()
-            button.frame = (frame: faceViewBounds)
-            //button.backgroundColor = UIColor.clear
-            button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-            button.tag = i
-            button.setTitle("", for: .normal)
-            //button.isHidden = true
-            self.view.addSubview(button)
-            
-            if face.hasLeftEyePosition {
-               // print("Left eye bounds are \(face.leftEyePosition)")
+            if faceBox {
+                let faceBox = UIView(frame: faceViewBounds)
+                
+                faceBox.layer.borderWidth = 1
+                faceBox.layer.borderColor = UIColor.red.cgColor
+                faceBox.backgroundColor = UIColor.clear
+                faceBox.tag = index
+                personPic.addSubview(faceBox)
+            } else {
+                
+                let button = UIButton()
+                button.frame = (frame: faceViewBounds)
+                //button.backgroundColor = UIColor.clear
+                button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+                button.tag = index
+                button.setTitle("", for: .normal)
+                //button.isHidden = true
+                self.view.addSubview(button)
+                
+                index += 1
             }
-            
-            if face.hasRightEyePosition {
-               // print("Right eye bounds are \(face.rightEyePosition)")
-            }
-            i += 1
         }
     }
     
@@ -158,33 +155,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
             }
         }
     }
-    @IBAction func camera(_ sender: Any) {
-        let picker = UIImagePickerController()
-        picker.allowsEditing = true
-        picker.delegate = self
-        present(picker, animated: true)
 
-    }
-    
-    func getSavedImage() {
-        let picker = UIImagePickerController()
-        picker.allowsEditing = true
-        picker.delegate = self
-        present(picker, animated: true)
-    }
-    
-    func screenShotMethod() {
-        self.toolBar.layer.backgroundColor = UIColor.clear.cgColor
-        //self.
-        //Create the UIImage
-        UIGraphicsBeginImageContext(view.frame.size)
-        view.layer.render(in: UIGraphicsGetCurrentContext()!)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        //Save it to the camera roll
-        UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
-    }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         guard let image = info[UIImagePickerControllerEditedImage] as? UIImage else { return }
@@ -196,28 +167,20 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
         for v in views {
             v.removeFromSuperview()
         }
-        
         personPic.image = image
-        
         detect()
         createBlur()
-        
-        //let beginImage = CIImage(image: currentImage)
-        //currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
-        
-        //applyProcessing()
     }
     
-    
-    
-//    func filterSelected(filterIndex: Int) {
-//        print(filterIndex)
-//        blurColor = blurArray[filterIndex]
-//    }
-//    
-//    func shapeSelected(isSquared: Bool) {
-//        isSquare = isSquared
-//    }
+    func takeScreenShot(completionHandler: @escaping (Bool) -> ()){
+        UIGraphicsBeginImageContextWithOptions(view.frame.size, true, 0.0)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
+        completionHandler(true)
+        }
+
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.none
@@ -228,6 +191,37 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
         blurFace()
     }
 
+}
+
+extension ViewController: optionsDelegate {
+    
+    func getSavedImage() {
+        let picker = UIImagePickerController()
+        picker.allowsEditing = true
+        picker.delegate = self
+        present(picker, animated: true)
+    }
+    
+    func screenShotMethod() {
+        self.toolBar.isHidden = true
+        takeScreenShot(completionHandler: {_ in
+            self.toolBar.isHidden = false
+            let alertController = UIAlertController(title: "YAY", message: "Photo has been saved to phone?", preferredStyle: .alert)
+            
+            let defaultAction = UIAlertAction(title: "DONE", style: .default, handler: nil)
+            alertController.addAction(defaultAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+        })
+    }
+//    func faceBoxFunction() {
+//        for v in personPic.subviews{
+//            v.removeFromSuperview()
+//        }
+//        faceBox = !faceBox
+//        detect()
+//        createBlur()
+//    }
 }
 
 

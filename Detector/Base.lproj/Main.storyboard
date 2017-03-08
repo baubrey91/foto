@@ -68,7 +68,7 @@
                                 <rect key="frame" x="0.0" y="28" width="300" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OFD-5S-Z5J" id="Zok-Hl-OQs">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -115,7 +115,7 @@
                     <navigationItem key="navigationItem" id="XqP-hE-7hv">
                         <barButtonItem key="rightBarButtonItem" systemItem="camera" id="chx-1g-Ojn">
                             <connections>
-                                <action selector="takePhoto:" destination="FHe-mm-V9Z" id="vns-2I-kk8"/>
+                                <action selector="takePhotoWithSender:" destination="FHe-mm-V9Z" id="Ugk-7K-0eW"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -210,12 +210,12 @@
                     <connections>
                         <outlet property="filterBottomButton" destination="Esc-pG-WmQ" id="oor-Dl-WwG"/>
                         <outlet property="personPic" destination="XG8-G3-2a0" id="dYg-c8-Bnc"/>
-                        <outlet property="tooBar" destination="NMn-ld-9Yx" id="9aM-S7-syB"/>
+                        <outlet property="toolBar" destination="NMn-ld-9Yx" id="OWJ-Mr-UKF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cDx-s1-t0Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2786.4000000000001" y="1376.7616191904049"/>
+            <point key="canvasLocation" x="1862" y="1158"/>
         </scene>
         <!--Filters Table View-->
         <scene sceneID="Wtl-kQ-eOe">
@@ -230,7 +230,7 @@
                                 <rect key="frame" x="0.0" y="28" width="300" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="guO-gB-j0A" id="DO5-cf-BDS">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -265,7 +265,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="by3-MG-Lri" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1847.2" y="1376.7616191904049"/>
+            <point key="canvasLocation" x="956" y="1159"/>
         </scene>
     </scenes>
     <resources>

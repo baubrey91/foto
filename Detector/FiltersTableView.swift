@@ -17,7 +17,7 @@ protocol optionsDelegate {
 
 class FiltersTableView: UITableViewController {
     
-    let optionsArray = ["extraLight", "light", "dark", "regular", "prominent", "square blurs", "circular blurs", "Camera", "Photo Album", "Save"]
+    let optionsArray = ["ExtraLight", "Light", "Dark", "Regular", "Prominent", "Square Blurs", "Circular Blurs", "Camera", "Photo Album", "Save","FindFaces"]
     //let optionsArray = ["FILTERS","extraLight", "light", "dark", "regular", "prominent", "SHAPE", "square blurs", "circular blurs", "PHOTOS", "Camera", "Photo Album", "Save"]
     
     var delegate: optionsDelegate? = nil
@@ -60,17 +60,16 @@ class FiltersTableView: UITableViewController {
                 delegate?.isSquared = false}
         case 7:
             dismiss(animated: true, completion: nil)
-
             if delegate != nil {
                 delegate?.getSavedImage()}
         case 8:
             if delegate != nil {
-                delegate?.screenShotMethod()}
+                delegate?.getSavedImage()}
         default:
-            break
+            if delegate != nil {
+                delegate?.screenShotMethod()}
         }
         dismiss(animated: true, completion: nil)
     }
 
-    
 }
