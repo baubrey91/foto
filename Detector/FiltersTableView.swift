@@ -3,6 +3,7 @@ import UIKit
 protocol optionsDelegate {
     var blurIndex: Int {get set}
     var isSquared: Bool {get set}
+    func takePhoto()
     func getSavedImage()
     func screenShotMethod()
 }
@@ -36,11 +37,11 @@ class FiltersTableView: UITableViewController {
         cell.textLabel?.text = optionsArray[indexPath.row]
         switch indexPath.row {
         case 5,6:
-            cell.backgroundColor = UIColor.blue
+            cell.backgroundColor = UIColor(red: 195.0/255.0, green: 220.0/255.0, blue: 255.0/255.0, alpha: 1.0)
         case 7, 8, 9:
-            cell.backgroundColor = UIColor.green
+            cell.backgroundColor = UIColor(red: 195.0/255.0, green: 255.0/255.0, blue: 193.0/255.0, alpha: 1.0)
         default:
-            cell.backgroundColor = UIColor.lightGray
+            cell.backgroundColor = UIColor(red: 255.0/255.0, green: 224.0/255.0, blue: 193.0/255.0, alpha: 1.0)
         }
         return cell
     }
@@ -59,7 +60,7 @@ class FiltersTableView: UITableViewController {
         case 7:
             dismiss(animated: true, completion: nil)
             if delegate != nil {
-                delegate?.getSavedImage()}
+                delegate?.takePhoto()}
         case 8:
             if delegate != nil {
                 delegate?.getSavedImage()}

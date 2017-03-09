@@ -22,6 +22,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
                      UIBlurEffect(style: UIBlurEffectStyle.prominent)]
 
     var blurColor:UIBlurEffect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
+    //var imagePicker: UIImagePickerController!
     var opacity:Float = 1.0
     var currentFace =   0
     var blurIndex =     0
@@ -158,16 +159,29 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
 
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        guard let image = info[UIImagePickerControllerEditedImage] as? UIImage else { return }
+        guard let image = (info[UIImagePickerControllerEditedImage] as? UIImage) else {
+            let alertController = UIAlertController(title: "OH NO", message: "Something went wrong, please try again.", preferredStyle: .alert)
+            
+            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(defaultAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+
+            dismiss(animated: true)
+            return
+        }
         
         dismiss(animated: true)
-    
         let views = personPic.subviews as! [UIVisualEffectView]
-        
+ 
         for v in views {
             v.removeFromSuperview()
         }
         personPic.image = image
+        xArray          = []
+        yArray          = []
+        widthArray      = []
+        heightArray     = []
         detect()
         createBlur()
     }
@@ -180,7 +194,6 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
         UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
         completionHandler(true)
         }
-
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.none
@@ -196,23 +209,31 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
 extension ViewController: optionsDelegate {
     
     func getSavedImage() {
-        let picker = UIImagePickerController()
-        picker.allowsEditing = true
-        picker.delegate = self
-        present(picker, animated: true)
+        let imagePicker = UIImagePickerController()
+        imagePicker.allowsEditing = true
+        imagePicker.delegate = self
+        present(imagePicker, animated: true)
     }
     
     func screenShotMethod() {
         self.toolBar.isHidden = true
         takeScreenShot(completionHandler: {_ in
             self.toolBar.isHidden = false
-            let alertController = UIAlertController(title: "YAY", message: "Photo has been saved to phone?", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "YAY", message: "Photo has been saved to phone!", preferredStyle: .alert)
             
             let defaultAction = UIAlertAction(title: "DONE", style: .default, handler: nil)
             alertController.addAction(defaultAction)
             
             self.present(alertController, animated: true, completion: nil)
         })
+    }
+    
+    func takePhoto() {
+        let imagePicker =  UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .camera
+    
+        present(imagePicker, animated: true, completion: nil)
     }
 //    func faceBoxFunction() {
 //        for v in personPic.subviews{
