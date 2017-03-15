@@ -230,9 +230,9 @@ extension ViewController: optionsDelegate {
     
     func takePhoto() {
         let imagePicker =  UIImagePickerController()
+        imagePicker.allowsEditing = true
         imagePicker.delegate = self
         imagePicker.sourceType = .camera
-    
         present(imagePicker, animated: true, completion: nil)
     }
 //    func faceBoxFunction() {

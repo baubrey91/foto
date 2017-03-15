@@ -38,6 +38,7 @@
                                             </connections>
                                         </slider>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="SRM-ch-wgW"/>
                                     <barButtonItem title="Options" id="Esc-pG-WmQ">
                                         <connections>
                                             <segue destination="bSB-ST-nLG" kind="popoverPresentation" identifier="popoverSegue" popoverAnchorBarButtonItem="Esc-pG-WmQ" id="BWD-KA-dYZ">
@@ -69,7 +70,8 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ydL-S8-uFX">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="550"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.76470588235294112" green="1" blue="0.75686274509803919" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="sectionIndexBackgroundColor" red="0.76470588235294112" green="1" blue="0.75686274509803919" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="guO-gB-j0A">
                                 <rect key="frame" x="0.0" y="28" width="300" height="44"/>
