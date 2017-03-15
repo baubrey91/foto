@@ -18,7 +18,7 @@ Blur uses apples facial recognition to determine where to make adjustments to th
 
 ## Video Walkthrough 
 
-Coming Soon
+<a href="https://gifyu.com/image/Sfim"><img src="https://gifyu.com/images/blurrin.gif" alt="blurrin.gif" border="0" /></a>
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
