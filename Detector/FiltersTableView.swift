@@ -51,24 +51,34 @@ class FiltersTableView: UITableViewController {
         case 0, 1, 2, 3, 4:
             if delegate != nil {
                 delegate?.blurIndex = indexPath.row - 1}
+            dismiss(animated: true, completion: nil)
+
         case 5:
             if delegate != nil {
                 delegate?.isSquared = true}
+            dismiss(animated: true, completion: nil)
+
         case 6:
             if delegate != nil {
                 delegate?.isSquared = false}
+            dismiss(animated: true, completion: nil)
+
         case 7:
             dismiss(animated: true, completion: nil)
             if delegate != nil {
                 delegate?.takePhoto()}
         case 8:
+            dismiss(animated: true, completion: nil)
             if delegate != nil {
                 delegate?.getSavedImage()}
+           // dismiss(animated: true, completion: nil)
+
         default:
             if delegate != nil {
                 delegate?.screenShotMethod()}
+         //   dismiss(animated: true, completion: nil)
+
         }
-        dismiss(animated: true, completion: nil)
     }
 
 }
