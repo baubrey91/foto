@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7jB-Y7-poR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Qdi-1W-4vN">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,6 +9,24 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Floating Test-->
+        <scene sceneID="6Kd-or-7DN">
+            <objects>
+                <viewController id="ZXo-3S-AxW" customClass="FloatingTest" customModule="Detector" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Qzo-0J-hWN"/>
+                        <viewControllerLayoutGuide type="bottom" id="IzP-5j-lgS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5Zy-Od-h96">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oLh-1g-Idf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1419" y="311"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="x7c-Vl-44u">
             <objects>
@@ -31,7 +49,7 @@
                                 <items>
                                     <barButtonItem style="plain" id="Ioh-N0-Qeg">
                                         <slider key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" id="9KG-wP-Dig">
-                                            <rect key="frame" x="14" y="6.5" width="229" height="31"/>
+                                            <rect key="frame" x="14" y="7" width="229" height="31"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <connections>
                                                 <action selector="opacitySlider:" destination="Qdi-1W-4vN" eventType="valueChanged" id="dFq-qw-gza"/>
@@ -102,9 +120,10 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7jB-Y7-poR" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UxZ-8e-sgh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="UxZ-8e-sgh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
