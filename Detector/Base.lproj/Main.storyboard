@@ -9,24 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Floating Test-->
-        <scene sceneID="6Kd-or-7DN">
-            <objects>
-                <viewController id="ZXo-3S-AxW" customClass="FloatingTest" customModule="Detector" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Qzo-0J-hWN"/>
-                        <viewControllerLayoutGuide type="bottom" id="IzP-5j-lgS"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="5Zy-Od-h96">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oLh-1g-Idf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1419" y="311"/>
-        </scene>
         <!--View Controller-->
         <scene sceneID="x7c-Vl-44u">
             <objects>
@@ -43,96 +25,51 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NMn-ld-9Yx">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F9Y-1k-ttR" customClass="TNSlider" customModule="Detector">
+                                <rect key="frame" x="0.0" y="636" width="375" height="31"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <items>
-                                    <barButtonItem style="plain" id="Ioh-N0-Qeg">
-                                        <slider key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" id="9KG-wP-Dig">
-                                            <rect key="frame" x="14" y="7" width="229" height="31"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <connections>
-                                                <action selector="opacitySlider:" destination="Qdi-1W-4vN" eventType="valueChanged" id="dFq-qw-gza"/>
-                                            </connections>
-                                        </slider>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="SRM-ch-wgW"/>
-                                    <barButtonItem title="Options" id="Esc-pG-WmQ">
-                                        <connections>
-                                            <segue destination="bSB-ST-nLG" kind="popoverPresentation" identifier="popoverSegue" popoverAnchorBarButtonItem="Esc-pG-WmQ" id="BWD-KA-dYZ">
-                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                            </segue>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                                <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </toolbar>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="value">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="minimum">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="maximum">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="thumbTextColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="thumbBackgroundColor">
+                                        <color key="value" red="0.28235294119999998" green="0.46666666670000001" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="trackMaxColor">
+                                        <color key="value" red="0.94901960780000005" green="0.87058823529999996" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="trackMinColor">
+                                        <color key="value" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="opacitySlider:" destination="Qdi-1W-4vN" eventType="valueChanged" id="wDi-Pc-ZtM"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="bCw-Pw-lJ6"/>
                     <connections>
-                        <outlet property="filterBottomButton" destination="Esc-pG-WmQ" id="oor-Dl-WwG"/>
+                        <outlet property="opacitySlider" destination="F9Y-1k-ttR" id="nu8-Je-rdc"/>
                         <outlet property="personPic" destination="XG8-G3-2a0" id="dYg-c8-Bnc"/>
-                        <outlet property="toolBar" destination="NMn-ld-9Yx" id="OWJ-Mr-UKF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cDx-s1-t0Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1862" y="1158"/>
-        </scene>
-        <!--Filters Table View-->
-        <scene sceneID="Wtl-kQ-eOe">
-            <objects>
-                <tableViewController id="bSB-ST-nLG" customClass="FiltersTableView" customModule="Detector" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ydL-S8-uFX">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="550"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.76470588235294112" green="1" blue="0.75686274509803919" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="sectionIndexBackgroundColor" red="0.76470588235294112" green="1" blue="0.75686274509803919" alpha="1" colorSpace="calibratedRGB"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="guO-gB-j0A">
-                                <rect key="frame" x="0.0" y="28" width="300" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="guO-gB-j0A" id="DO5-cf-BDS">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="bSB-ST-nLG" id="jGW-pO-IKq"/>
-                            <outlet property="delegate" destination="bSB-ST-nLG" id="IAl-4n-FPn"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="V8m-KL-vkg"/>
-                    <value key="contentSizeForViewInPopover" type="size" width="300" height="550"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="300" height="550"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="z6j-xA-A43" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1861" y="1920"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="nyg-Sz-5OD">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7jB-Y7-poR" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="UxZ-8e-sgh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Qdi-1W-4vN" kind="relationship" relationship="rootViewController" id="0u6-e1-HgI"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="by3-MG-Lri" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="956" y="1159"/>
+            <point key="canvasLocation" x="1861.5999999999999" y="1156.3718140929536"/>
         </scene>
     </scenes>
     <resources>

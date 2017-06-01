@@ -50,7 +50,10 @@
 		CA98970C1ED7AD14002B5FA1 /* UILayoutSupport+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9896ED1ED7AD14002B5FA1 /* UILayoutSupport+Extensions.swift */; };
 		CA9897111ED8CA5D002B5FA1 /* SpiderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9897101ED8CA5D002B5FA1 /* SpiderButton.swift */; };
 		CA9897131ED8CF53002B5FA1 /* SpiderButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA9897121ED8CF53002B5FA1 /* SpiderButton.xib */; };
-		CAFA49B31E64EA380081E5AF /* FiltersTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA49B21E64EA380081E5AF /* FiltersTableView.swift */; };
+		CAB112C61EE0B4B60085A20C /* TNSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB112C51EE0B4B60085A20C /* TNSlider.swift */; };
+		CAB112C81EE0B4D70085A20C /* TNConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB112C71EE0B4D70085A20C /* TNConstants.swift */; };
+		CAB112CA1EE0B5090085A20C /* TNTextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB112C91EE0B5090085A20C /* TNTextLayer.swift */; };
+		CAB112CC1EE0B5470085A20C /* TNTrackLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB112CB1EE0B5470085A20C /* TNTrackLayer.swift */; };
 		CC2647FD1D6A9C2F00C9E5B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2647FC1D6A9C2F00C9E5B1 /* AppDelegate.swift */; };
 		CC2647FF1D6A9C2F00C9E5B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2647FE1D6A9C2F00C9E5B1 /* ViewController.swift */; };
 		CC2648021D6A9C2F00C9E5B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC2648001D6A9C2F00C9E5B1 /* Main.storyboard */; };
@@ -102,7 +105,10 @@
 		CA9896ED1ED7AD14002B5FA1 /* UILayoutSupport+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILayoutSupport+Extensions.swift"; sourceTree = "<group>"; };
 		CA9897101ED8CA5D002B5FA1 /* SpiderButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpiderButton.swift; sourceTree = "<group>"; };
 		CA9897121ED8CF53002B5FA1 /* SpiderButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpiderButton.xib; sourceTree = "<group>"; };
-		CAFA49B21E64EA380081E5AF /* FiltersTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersTableView.swift; sourceTree = "<group>"; };
+		CAB112C51EE0B4B60085A20C /* TNSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNSlider.swift; sourceTree = "<group>"; };
+		CAB112C71EE0B4D70085A20C /* TNConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNConstants.swift; sourceTree = "<group>"; };
+		CAB112C91EE0B5090085A20C /* TNTextLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNTextLayer.swift; sourceTree = "<group>"; };
+		CAB112CB1EE0B5470085A20C /* TNTrackLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNTrackLayer.swift; sourceTree = "<group>"; };
 		CC2647F91D6A9C2F00C9E5B1 /* Detector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Detector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC2647FC1D6A9C2F00C9E5B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC2647FE1D6A9C2F00C9E5B1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -176,6 +182,17 @@
 			name = LiquidCircle;
 			sourceTree = "<group>";
 		};
+		CAB112C41EE0B4A70085A20C /* TNSlider */ = {
+			isa = PBXGroup;
+			children = (
+				CAB112C51EE0B4B60085A20C /* TNSlider.swift */,
+				CAB112C71EE0B4D70085A20C /* TNConstants.swift */,
+				CAB112C91EE0B5090085A20C /* TNTextLayer.swift */,
+				CAB112CB1EE0B5470085A20C /* TNTrackLayer.swift */,
+			);
+			name = TNSlider;
+			sourceTree = "<group>";
+		};
 		CC2647F01D6A9C2F00C9E5B1 = {
 			isa = PBXGroup;
 			children = (
@@ -195,12 +212,12 @@
 		CC2647FB1D6A9C2F00C9E5B1 /* Detector */ = {
 			isa = PBXGroup;
 			children = (
+				CAB112C41EE0B4A70085A20C /* TNSlider */,
 				CA98970D1ED7AE8A002B5FA1 /* LiquidCircle */,
 				CA9896CE1ED7AD07002B5FA1 /* SnapKit */,
 				CC2647FC1D6A9C2F00C9E5B1 /* AppDelegate.swift */,
 				5728F7001D6B4D0A00014D42 /* CameraViewController.swift */,
 				CA9896BC1ED7ABD7002B5FA1 /* FloatingTest.swift */,
-				CAFA49B21E64EA380081E5AF /* FiltersTableView.swift */,
 				CC2647FE1D6A9C2F00C9E5B1 /* ViewController.swift */,
 				CC2648001D6A9C2F00C9E5B1 /* Main.storyboard */,
 				CA9897121ED8CF53002B5FA1 /* SpiderButton.xib */,
@@ -288,12 +305,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA9897011ED7AD14002B5FA1 /* ConstraintMultiplierTarget.swift in Sources */,
+				CAB112CA1EE0B5090085A20C /* TNTextLayer.swift in Sources */,
 				CC2647FF1D6A9C2F00C9E5B1 /* ViewController.swift in Sources */,
 				CA9897071ED7AD14002B5FA1 /* ConstraintView+Extensions.swift in Sources */,
-				CAFA49B31E64EA380081E5AF /* FiltersTableView.swift in Sources */,
 				CA9896FB1ED7AD14002B5FA1 /* ConstraintMaker.swift in Sources */,
 				CA9896EE1ED7AD14002B5FA1 /* Constraint.swift in Sources */,
 				CA9897111ED8CA5D002B5FA1 /* SpiderButton.swift in Sources */,
+				CAB112CC1EE0B5470085A20C /* TNTrackLayer.swift in Sources */,
 				CA98970C1ED7AD14002B5FA1 /* UILayoutSupport+Extensions.swift in Sources */,
 				CA9897051ED7AD14002B5FA1 /* ConstraintRelation.swift in Sources */,
 				CA9896F91ED7AD14002B5FA1 /* ConstraintLayoutSupport.swift in Sources */,
@@ -324,6 +342,7 @@
 				CA9896FE1ED7AD14002B5FA1 /* ConstraintMakerFinalizable.swift in Sources */,
 				CA9896BD1ED7ABD7002B5FA1 /* FloatingTest.swift in Sources */,
 				CA9897091ED7AD14002B5FA1 /* Debugging.swift in Sources */,
+				CAB112C81EE0B4D70085A20C /* TNConstants.swift in Sources */,
 				CA9896F71ED7AD14002B5FA1 /* ConstraintLayoutGuide.swift in Sources */,
 				CA9897001ED7AD14002B5FA1 /* ConstraintMakerRelatable.swift in Sources */,
 				CA9896C71ED7ACAF002B5FA1 /* UIColorEx.swift in Sources */,
@@ -331,6 +350,7 @@
 				CA9896C61ED7ACAF002B5FA1 /* SimpleCircleLiquidEngine.swift in Sources */,
 				CA9896F11ED7AD14002B5FA1 /* ConstraintConstantTarget.swift in Sources */,
 				CA9897041ED7AD14002B5FA1 /* ConstraintRelatableTarget.swift in Sources */,
+				CAB112C61EE0B4B60085A20C /* TNSlider.swift in Sources */,
 				CA9896F21ED7AD14002B5FA1 /* ConstraintDescription.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

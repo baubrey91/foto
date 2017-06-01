@@ -14,7 +14,7 @@ import UIKit
     @objc optional func liquidFloatingActionButton(_ liquidFloatingActionButton: LiquidFloatingActionButton, didSelectItemAtIndex index: Int)
 }
 
-public enum LiquidFloatingActionButtonAnimateStyle : Int {
+public enum LiquidFloatingActionButtonAnimateStyle: Int {
     case up
     case right
     case left
@@ -22,10 +22,10 @@ public enum LiquidFloatingActionButtonAnimateStyle : Int {
 }
 
 @IBDesignable
-open class LiquidFloatingActionButton : UIView {
+open class LiquidFloatingActionButton: UIView {
     
     fileprivate let internalRadiusRatio: CGFloat = 20.0 / 56.0
-    open var cellRadiusRatio: CGFloat      = 0.38
+    open var cellRadiusRatio: CGFloat      = 0.30
     open var animateStyle: LiquidFloatingActionButtonAnimateStyle = .up {
         didSet {
             baseView.animateStyle = animateStyle
@@ -48,7 +48,7 @@ open class LiquidFloatingActionButton : UIView {
     }
     open fileprivate(set) var isClosed: Bool = true
     
-    @IBInspectable open var color: UIColor = UIColor(red: 82 / 255.0, green: 112 / 255.0, blue: 235 / 255.0, alpha: 1.0) {
+    @IBInspectable open var color: UIColor = UIColor(red: 102 / 255.0, green: 194 / 255.0, blue: 255 / 255.0, alpha: 1.0) {
         didSet {
             baseView.color = color
         }
@@ -105,7 +105,7 @@ open class LiquidFloatingActionButton : UIView {
     open func open() {
         
         // rotate plus icon
-        CATransaction.setAnimationDuration(0.8)
+        CATransaction.setAnimationDuration(0.1)
         self.plusLayer.transform = CATransform3DMakeRotation((CGFloat(M_PI) * rotationDegrees) / 180, 0, 0, 1)
         
         let cells = cellArray()
@@ -122,7 +122,7 @@ open class LiquidFloatingActionButton : UIView {
     open func close() {
         
         // rotate plus icon
-        CATransaction.setAnimationDuration(0.8)
+        CATransaction.setAnimationDuration(0.4)
         self.plusLayer.transform = CATransform3DMakeRotation(0, 0, 0, 1)
         
         self.baseView.close(cellArray())
@@ -262,7 +262,7 @@ class ActionBarBaseView : UIView {
 
 class CircleLiquidBaseView : ActionBarBaseView {
     
-    let openDuration: CGFloat  = 0.6
+    let openDuration: CGFloat  = 0.4
     let closeDuration: CGFloat = 0.2
     let viscosity: CGFloat     = 0.65
     var animateStyle: LiquidFloatingActionButtonAnimateStyle = .up

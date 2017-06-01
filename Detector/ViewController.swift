@@ -17,8 +17,8 @@ public class CustomCell: LiquidFloatingCell {
         super.setupView(view)
         let label = UILabel()
         label.text = name
-        label.textColor = UIColor.white
-        label.font = UIFont(name: "Helvetica-Neue", size: 12)
+        label.textColor = UIColor.darkGray
+        label.font = UIFont(name: "Helvetica-Neue", size: 10)
         addSubview(label)
         label.snp.makeConstraints { make in
             make.right.equalTo(self).offset(80)
@@ -60,10 +60,7 @@ public class CustomDrawingActionButton: LiquidFloatingActionButton {
 
 class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var personPic: UIImageView!
-    @IBOutlet weak var filterButton: UIButton!
-    @IBOutlet weak var filterBottomButton: UIBarButtonItem!
-    @IBOutlet weak var toolBar: UIToolbar!
-    
+    @IBOutlet weak var opacitySlider: TNSlider!
     
     var xArray = [CGFloat]()
     var yArray = [CGFloat]()
@@ -172,16 +169,16 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
             return cell
         }
         
-        cells.append(cellFactory("ic_cloud"))//extraLight
-        cells.append(customCellFactory("ic_system"))//Light
-        cells.append(customCellFactory("ic_system"))//Dark
-        cells.append(customCellFactory("ic_system"))//Regular
-        cells.append(customCellFactory("ic_system"))//Prominent
-        cells.append(customCellFactory("ic_system"))//Square
-        cells.append(customCellFactory("ic_system"))//Circulkar
+        cells.append(customCellFactory("One"))//extraLight
+        cells.append(customCellFactory("Two"))//Light
+        cells.append(customCellFactory("Three"))//Dark
+        cells.append(customCellFactory("Four"))//Regular
+        cells.append(customCellFactory("Five"))//Prominent
+        cells.append(customCellFactory("Square"))//Square
+        cells.append(customCellFactory("Circle"))//Circular
 
         //let floatingFrame = CGRect(x: self.view.frame.width - 56 - 16, y: self.view.frame.height - 56 - 16, width: 56, height: 56)
-        let optionsFrame = CGRect(x: 16, y: 16, width: 56, height: 56)
+        let optionsFrame = CGRect(x: 20, y: 20, width: 66, height: 66)
         let optionsButton = createButton(optionsFrame, .down)
 
         let image = UIImage(named: "ic_art")
@@ -297,17 +294,6 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "popoverSegue" {
-            if let popoverTBC = segue.destination as? FiltersTableView{
-                popoverTBC.preferredContentSize = CGSize(width: 175, height: 450)
-                //popoverTBC.delegate = self
-                popoverTBC.popoverPresentationController?.delegate = self
-            }
-        }
-    }
-
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         guard let image = (info[UIImagePickerControllerEditedImage] as? UIImage) else {
             let alertController = UIAlertController(title: "OH NO", message: "Something went wrong, please try again.", preferredStyle: .alert)
@@ -362,7 +348,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
         view.addSubview(floatingClipButton)
     }
     
-    @IBAction func opacitySlider(_ sender: UISlider) {
+    @IBAction func opacitySlider(_ sender: TNSlider) {
         opacity = sender.value
         blurFace()
     }
@@ -383,12 +369,14 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
     }
     
     func savePhoto(_ sender: AnyObject) {
-        self.toolBar.isHidden = true
+        
+        self.opacitySlider.isHidden = true
+        
         self.floatingClipButton.isHidden = true
         self.floatingActionButton.isHidden = true
         //self.floatingClipButton.contentView.isHidden = true
         takeScreenShot(completionHandler: { _ in
-            self.toolBar.isHidden = false
+            self.opacitySlider.isHidden = false
             self.floatingClipButton.isHidden = false
             self.floatingActionButton.isHidden = false
 
@@ -402,44 +390,6 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
     }
 }
 
-/*extension ViewController: optionsDelegate {
-    
-    func getSavedImage() {
-        let imagePicker = UIImagePickerController()
-        imagePicker.allowsEditing = true
-        imagePicker.delegate = self
-        present(imagePicker, animated: true)
-    }
-    
-    func screenShotMethod() {
-        self.toolBar.isHidden = true
-        takeScreenShot(completionHandler: {_ in
-            self.toolBar.isHidden = false
-            let alertController = UIAlertController(title: "YAY", message: "Photo has been saved to phone!", preferredStyle: .alert)
-            
-            let defaultAction = UIAlertAction(title: "DONE", style: .default, handler: nil)
-            alertController.addAction(defaultAction)
-            
-            self.present(alertController, animated: true, completion: nil)
-        })
-    }
-    
-    func takePhoto() {
-        let imagePicker =  UIImagePickerController()
-        imagePicker.allowsEditing = true
-        imagePicker.delegate = self
-        imagePicker.sourceType = .camera
-        present(imagePicker, animated: true, completion: nil)
-    }
-//    func faceBoxFunction() {
-//        for v in personPic.subviews{
-//            v.removeFromSuperview()
-//        }
-//        faceBox = !faceBox
-//        detect()
-//        createBlur()
-//    }
-}*/
 
 extension ViewController: LiquidFloatingActionButtonDataSource, LiquidFloatingActionButtonDelegate {
     
@@ -463,8 +413,4 @@ extension ViewController: LiquidFloatingActionButtonDataSource, LiquidFloatingAc
         liquidFloatingActionButton.close()
     }
 }
-
-
-
-
 
