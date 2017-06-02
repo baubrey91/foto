@@ -14,11 +14,11 @@ Use the slider to adjust the intensity of the blur.
 Import your own photo from your photo library, or take a picture.
 Save the photo to your library.
 
-Blur uses apples facial recognition to determine where to make adjustments to the image.
+Blur uses facial recognition to determine where to make adjustments to the image.
 
 ## Video Walkthrough 
 
-<a href="https://gifyu.com/image/Sfim"><img src="https://gifyu.com/images/blurrin.gif" alt="blurrin.gif" border="0" /></a>
+[![BlurrinSite.gif](https://s17.postimg.org/e34y4d733/Blurrin_Site.gif)](https://postimg.org/image/5kvi010kb/)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
@@ -32,6 +32,10 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
     See the License for the specific language governing permissions and
     limitations under the License.
 
+## Credit
+icon8.com
+TNSlider
+LiquidButton
 
 
 
