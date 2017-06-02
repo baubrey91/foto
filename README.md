@@ -18,7 +18,7 @@ Blur uses facial recognition to determine where to make adjustments to the image
 
 ## Video Walkthrough 
 
-[![BlurrinSite.gif](https://s17.postimg.org/e34y4d733/Blurrin_Site.gif)](https://postimg.org/image/5kvi010kb/)
+[![BlurrinSite.gif](https://s21.postimg.org/9o964d1c7/Blurrin_Site.gif)](https://postimg.org/image/wcyd3xipv/)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
