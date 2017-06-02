@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5728F7011D6B4D0A00014D42 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5728F7001D6B4D0A00014D42 /* CameraViewController.swift */; };
-		CA9896BD1ED7ABD7002B5FA1 /* FloatingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9896BC1ED7ABD7002B5FA1 /* FloatingTest.swift */; };
 		CA9896BF1ED7AC5B002B5FA1 /* LiquidFloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9896BE1ED7AC5B002B5FA1 /* LiquidFloatingActionButton.swift */; };
 		CA9896C41ED7ACAF002B5FA1 /* LiquidUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9896C01ED7ACAF002B5FA1 /* LiquidUtil.swift */; };
 		CA9896C51ED7ACAF002B5FA1 /* LiquittableCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9896C11ED7ACAF002B5FA1 /* LiquittableCircle.swift */; };
@@ -63,7 +62,6 @@
 
 /* Begin PBXFileReference section */
 		5728F7001D6B4D0A00014D42 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
-		CA9896BC1ED7ABD7002B5FA1 /* FloatingTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingTest.swift; sourceTree = "<group>"; };
 		CA9896BE1ED7AC5B002B5FA1 /* LiquidFloatingActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiquidFloatingActionButton.swift; sourceTree = "<group>"; };
 		CA9896C01ED7ACAF002B5FA1 /* LiquidUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiquidUtil.swift; sourceTree = "<group>"; };
 		CA9896C11ED7ACAF002B5FA1 /* LiquittableCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiquittableCircle.swift; sourceTree = "<group>"; };
@@ -217,7 +215,6 @@
 				CA9896CE1ED7AD07002B5FA1 /* SnapKit */,
 				CC2647FC1D6A9C2F00C9E5B1 /* AppDelegate.swift */,
 				5728F7001D6B4D0A00014D42 /* CameraViewController.swift */,
-				CA9896BC1ED7ABD7002B5FA1 /* FloatingTest.swift */,
 				CC2647FE1D6A9C2F00C9E5B1 /* ViewController.swift */,
 				CC2648001D6A9C2F00C9E5B1 /* Main.storyboard */,
 				CA9897121ED8CF53002B5FA1 /* SpiderButton.xib */,
@@ -340,7 +337,6 @@
 				CA9896F61ED7AD14002B5FA1 /* ConstraintItem.swift in Sources */,
 				CA9896F01ED7AD14002B5FA1 /* ConstraintConfig.swift in Sources */,
 				CA9896FE1ED7AD14002B5FA1 /* ConstraintMakerFinalizable.swift in Sources */,
-				CA9896BD1ED7ABD7002B5FA1 /* FloatingTest.swift in Sources */,
 				CA9897091ED7AD14002B5FA1 /* Debugging.swift in Sources */,
 				CAB112C81EE0B4D70085A20C /* TNConstants.swift in Sources */,
 				CA9896F71ED7AD14002B5FA1 /* ConstraintLayoutGuide.swift in Sources */,

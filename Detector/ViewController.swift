@@ -178,14 +178,14 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
         cells.append(customCellFactory("Circle"))//Circular
 
         //let floatingFrame = CGRect(x: self.view.frame.width - 56 - 16, y: self.view.frame.height - 56 - 16, width: 56, height: 56)
-        let optionsFrame = CGRect(x: 20, y: 20, width: 66, height: 66)
-        let optionsButton = createButton(optionsFrame, .down)
+        let optionsFrame = CGRect(x: 10, y: 20, width: 66, height: 66)
+        floatingActionButton = createButton(optionsFrame, .down)
 
         let image = UIImage(named: "ic_art")
-        optionsButton.image = image
+        floatingActionButton.image = image
         
         //let topLeftButton = createButton(floatingFrame2, .down)
-        self.view.addSubview(optionsButton)
+        self.view.addSubview(floatingActionButton)
     }
     
     func detect() {
@@ -239,7 +239,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
             } else {
                 
                 let button = UIButton()
-                button.frame = (frame: faceViewBounds)
+                button.frame = faceViewBounds
                 //button.backgroundColor = UIColor.clear
                 button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
                 button.tag = index
@@ -404,9 +404,9 @@ extension ViewController: LiquidFloatingActionButtonDataSource, LiquidFloatingAc
     func liquidFloatingActionButton(_ liquidFloatingActionButton: LiquidFloatingActionButton, didSelectItemAtIndex index: Int) {
         switch index {
         case 5:
-            isSquared = false
-        case 6:
             isSquared = true
+        case 6:
+            isSquared = false
         default:
             blurColor = blurArray[index]
         }
